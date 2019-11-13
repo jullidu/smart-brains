@@ -1,0 +1,13 @@
+.logo-box {
+  width: 150px;
+  height: 150px;
+}
+
+.Tilt {
+  background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(252, 193, 69, 1) 100%);
+  box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
