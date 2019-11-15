@@ -2,10 +2,11 @@ import React from 'react';
 import './faceRecognition.css';
 
 
-const FaceRecognition = ({ imgUrl }) => {
+const FaceRecognition = ({ imgUrl, box }) => {
   return (
     <div className='img-box'>
-      <img src={imgUrl} alt="" className='face-img' />
+      <img id='inputImg' src={imgUrl} alt="" className='face-img' />
+      <div className='face-border' style={{ top: box.topRow, right: box.rightCol, bottom: box.bottomRow, left: box.leftCol }}></div>
     </div>
   )
 }
