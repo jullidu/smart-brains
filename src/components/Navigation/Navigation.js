@@ -4,7 +4,7 @@ import './nav.css';
 const Navigation = ({ onRouteChange }) => {
   return (
     <nav className='nav' >
-      <p onClick={onRouteChange} className='nav-sign' > Sign Out </p>
+      <p onClick={() => onRouteChange('signin')} className='nav-sign' > Sign Out </p>
     </nav>
   )
 }
