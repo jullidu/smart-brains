@@ -8,6 +8,7 @@
   text-decoration: underline;
   cursor: pointer;
   margin: 0;
+  height: fit-content;
 }
 
 .nav-sign:hover {
