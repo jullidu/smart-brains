@@ -6,40 +6,31 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Particles from "react-particles-js";
 import particlesOptions from "./particlesjs-config.json";
-import Clarifai from "clarifai";
+
 import "./App.css";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
 
-const app = new Clarifai.App({
-  apiKey: "d2995783a7224ab7b39c77caf34a26e4"
-});
+const initialState = {
+  input: "",
+  imgUrl: "",
+  box: {},
+  route: "signin",
+  inSignedIn: false,
+  user: {
+    id: "",
+    name: "",
+    email: "",
+    entries: 0,
+    joined: ""
+  }
+};
 
 class App extends Component {
   constructor() {
     super();
-
-    this.state = {
-      input: "",
-      imgUrl: "",
-      box: {},
-      route: "signin",
-      inSignedIn: false,
-      user: {
-        id: "",
-        name: "",
-        email: "",
-        entries: 0,
-        joined: ""
-      }
-    };
+    this.state = initialState;
   }
-
-  // componentDidMount() {
-  //   fetch("http://localhost:3000/")
-  //     .then(response => response.json())
-  //     .then(console.log);
-  // }
 
   loadUser = data => {
     this.setState({
@@ -84,9 +75,14 @@ class App extends Component {
     this.setState({
       imgUrl: this.state.input
     });
-
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+    fetch("http://localhost:3000/imageurl", {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+      .then(response => response.json())
       .then(response => {
         if (response) {
           fetch("http://localhost:3000/image", {
@@ -108,9 +104,12 @@ class App extends Component {
   };
 
   onRouteChange = route => {
-    this.setState({
-      route: route
-    });
+    if (route === "signOut") {
+      this.setState(initialState);
+    } else if (route === "home") {
+      this.setState({ inSignedIn: true });
+    }
+    this.setState({ route: route });
   };
 
   render() {
