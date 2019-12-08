@@ -16,7 +16,7 @@ const initialState = {
   imgUrl: "",
   box: {},
   route: "signin",
-  inSignedIn: false,
+  isSignedIn: false,
   user: {
     id: "",
     name: "",
@@ -75,7 +75,7 @@ class App extends Component {
     this.setState({
       imgUrl: this.state.input
     });
-    fetch("http://localhost:3000/imageurl", {
+    fetch("https://pure-crag-33197.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -85,7 +85,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch("http://localhost:3000/image", {
+          fetch("https://pure-crag-33197.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -105,9 +105,10 @@ class App extends Component {
 
   onRouteChange = route => {
     if (route === "signOut") {
+      console.log("signout");
       this.setState(initialState);
     } else if (route === "home") {
-      this.setState({ inSignedIn: true });
+      this.setState({ isSignedIn: true });
     }
     this.setState({ route: route });
   };
