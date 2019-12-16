@@ -6,6 +6,8 @@ import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Particles from "react-particles-js";
 import particlesOptions from "./particlesjs-config.json";
+import { Helmet } from 'react-helmet';
+
 
 import "./App.css";
 import Signin from "./components/Signin/Signin";
@@ -113,9 +115,13 @@ class App extends Component {
   };
 
   render() {
+    const TITLE = 'Face Recognition App';
     const { route, box, imgUrl } = this.state;
     return (
       <div className="App">
+        <Helmet>
+          <title>{TITLE}</title>
+        </Helmet>
         <Particles className="particles" params={particlesOptions} />
         {route === "home" ? (
           <div>
@@ -138,11 +144,11 @@ class App extends Component {
         ) : route === "signOut" ? (
           <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         ) : (
-          <Register
-            loadUser={this.loadUser}
-            onRouteChange={this.onRouteChange}
-          />
-        )}
+                <Register
+                  loadUser={this.loadUser}
+                  onRouteChange={this.onRouteChange}
+                />
+              )}
       </div>
     );
   }
